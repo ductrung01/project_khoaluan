@@ -70,7 +70,7 @@ const ManagerHeader: React.FC<ManagerHeaderProps> = ({ toggleSidebar }) => {
     }, [isDropdownOpen]);
 
     return (
-        <header className="bg-nav fixed w-full top-0 z-1100" style={{ zIndex: 1100 }}>
+        <header className="bg-black fixed w-full top-0 z-1100" style={{ zIndex: 1100 }}>
             <div className="flex justify-between items-center px-4 py-2">
                 <div className="flex items-center">
                     {isManager && location.pathname.startsWith('/manager') && (

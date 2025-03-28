@@ -22,7 +22,7 @@ public class Product {
     Long id;
     @Column(columnDefinition = "nvarchar(255)")
     String name;
-    @Column(columnDefinition = "nvarchar(MAX)")
+    @Column(columnDefinition = "TEXT")
     String description;
     int price;
     @ManyToOne

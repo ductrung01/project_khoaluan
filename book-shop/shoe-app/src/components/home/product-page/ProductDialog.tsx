@@ -138,7 +138,7 @@ const ProductDialog: React.FC<ProductDialogProps> = ({ isOpen, product, onClose,
             address,
           };
           if (!selectedColor || !selectedSize) {
-            toast.error('Vui lòng chọn năm xuất / tái bản');
+            toast.error('Vui lòng chọn năm sản xuất');
             return;
           } else {
             if (paymentType === 'transfer') {
@@ -189,7 +189,7 @@ const ProductDialog: React.FC<ProductDialogProps> = ({ isOpen, product, onClose,
         };
         console.log('NowCreation:', nowCreation);
         if (!selectedColor || !selectedSize) {
-          toast.error('Vui lòng chọn năm xuất / tái bản');
+          toast.error('Vui lòng chọn năm sản xuất');
           return;
         } else {
           if (paymentType === 'transfer') {
@@ -333,7 +333,7 @@ const ProductDialog: React.FC<ProductDialogProps> = ({ isOpen, product, onClose,
       };
       console.log('NowCreation:', NowCreation);
       if (!selectedColor || !selectedSize) {
-        toast.error('Vui lòng chọn năm xuất / tái bản');
+        toast.error('Vui lòng chọn năm sản xuất');
         return;
       } else {
         const response = await addCartNow(NowCreation);
@@ -472,7 +472,7 @@ const ProductDialog: React.FC<ProductDialogProps> = ({ isOpen, product, onClose,
             </Box>
 
             <Box mt={2} display={'flex'} alignItems={'center'}>
-              <Typography variant="subtitle1">Năm xuất / tái bản:</Typography>
+              <Typography variant="subtitle1">Năm sản xuất:</Typography>
               <Box display="flex" gap={1} marginLeft={2}>
                 {product.sizes.map((size, index) => (
                   <Button

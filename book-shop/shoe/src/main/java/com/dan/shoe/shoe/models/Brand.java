@@ -17,7 +17,7 @@ public class Brand {
     private Long id;
     @Column(unique = true, columnDefinition = "nvarchar(255)")
     private String name;
-    @Column(columnDefinition = "nvarchar(MAX)")
+    @Column(columnDefinition = "TEXT")
     private String description;
     private String logoUrl;
 }

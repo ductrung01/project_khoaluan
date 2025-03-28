@@ -167,7 +167,7 @@ const ProductDetail: React.FC = () => {
                     };
                     console.log('NowCreation:', nowCreation);
                     if (!selectedColor || !selectedSize) {
-                        toast.error('Vui lòng chọn năm xuất / tái bản');
+                        toast.error('Vui lòng chọn năm sản xuất');
                         return;
                     } else {
                         const response = await createOrderNow(nowCreation);
@@ -190,7 +190,7 @@ const ProductDetail: React.FC = () => {
                     };
                     console.log('NowCreation:', nowCreation);
                     if (!selectedColor || !selectedSize) {
-                        toast.error('Vui lòng chọn năm xuất / tái bản');
+                        toast.error('Vui lòng chọn năm sản xuất');
                         return;
                     } else {
                         const response = await createOrderNow(nowCreation);
@@ -233,7 +233,7 @@ const ProductDetail: React.FC = () => {
                         };
                         console.log('NowCreation:', nowCreation);
                         if (!selectedColor || !selectedSize) {
-                            toast.error('Vui lòng chọn năm xuất / tái bản');
+                            toast.error('Vui lòng chọn năm sản xuất');
                             return;
                         } else {
                             const response = await createOrderNow(nowCreation);
@@ -257,7 +257,7 @@ const ProductDetail: React.FC = () => {
                         };
                         console.log('NowCreation:', nowCreation);
                         if (!selectedColor || !selectedSize) {
-                            toast.error('Vui lòng chọn năm xuất / tái bản');
+                            toast.error('Vui lòng chọn năm sản xuất');
                             return;
                         } else {
                             const response = await createOrderNow(nowCreation);
@@ -314,7 +314,7 @@ const ProductDetail: React.FC = () => {
             };
             console.log('NowCreation:', nowCreation);
             if (!selectedColor || !selectedSize) {
-                toast.error('Vui lòng chọn năm xuất / tái bản');
+                toast.error('Vui lòng chọn năm sản xuất');
                 return;
             } else {
                 const response = await addCartNow(nowCreation);
@@ -519,7 +519,7 @@ const ProductDetail: React.FC = () => {
                                     {productDetail.price !== productDetail.priceAfterDiscount && <DiscountLabel discount={productDetail.discountRate} />}
                                 </div>
                                 <Typography variant="h6">Tên sản phẩm: <strong>{productDetail.product.name}</strong></Typography>
-                                <Typography variant="subtitle1">Nhà xuất bản: <strong>{productDetail.product.brand.name}</strong></Typography>
+                                <Typography variant="subtitle1">Thương hiệu: <strong>{productDetail.product.brand.name}</strong></Typography>
                                 <Typography variant="h5" color="red" mt={2}>
                                     {productDetail.priceAfterDiscount.toLocaleString()}  VNĐ
                                 </Typography>
@@ -545,7 +545,7 @@ const ProductDetail: React.FC = () => {
                                 </Box>
 
                                 <Box mt={2} display={'flex'} alignItems={'center'}>
-                                    <Typography variant="subtitle1">Năm xuất / tái bản:</Typography>
+                                    <Typography variant="subtitle1">Năm sản xuất:</Typography>
                                     <Box display="flex" gap={1} marginLeft={2}>
                                         {productDetail.sizes.map((size, index) => (
                                             <Button
