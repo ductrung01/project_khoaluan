@@ -37,11 +37,9 @@ const CategoryManagement: React.FC = () => {
         try {
             const response = await createCategory(newCategory);
             setCategories([...categories, response.data]);
-            if (response) {
-                toast.success('Thêm thể loại thành công', {
-                    autoClose: 3000,
-                });
-            }
+            toast.success('Thêm thể loại thành công', {
+                autoClose: 3000,
+            });
             handleClose();
         } catch (error) {
             console.error('Error creating category:', error);
@@ -56,7 +54,7 @@ const CategoryManagement: React.FC = () => {
         try {
             const response = await getAllCategories(keyword, status, page, 10, '', '');
             setCategories(response.data.content);
-            setTotalPages(response.data.page.totalPages); // Cập nhật tổng số trang từ API
+            setTotalPages(response.data.page.totalPages);
             setLoading(false);
         } catch (error) {
             setError('Không thể tải dữ liệu');
@@ -82,19 +80,17 @@ const CategoryManagement: React.FC = () => {
 
     const handleCloseEdit = () => {
         setOpenEdit(false);
-        setNewCategory('');
+        setNewCategoryUpdate('');
     };
 
     const handleSaveEdit = async () => {
         try {
             if (selectedCategory?.id !== undefined) {
                 const response = await updateCategory(selectedCategory.id, newCategoryUpdate, selectedCategory.status);
-                fetchAllCategories(currentPage); // Cập nhật danh sách sau khi chỉnh sửa
-                if (response) {
-                    toast.success('Chỉnh sửa thể loại thành công', {
-                        autoClose: 3000,
-                    });
-                }
+                fetchAllCategories(currentPage);
+                toast.success('Chỉnh sửa thể loại thành công', {
+                    autoClose: 3000,
+                });
                 handleCloseEdit();
             } else {
                 toast.error('Chỉnh sửa thể loại thất bại', {
@@ -136,7 +132,7 @@ const CategoryManagement: React.FC = () => {
 
     const handleDelete = (id: number) => {
         Swal.fire({
-            title: 'Ban có chắc chắn muốn xóa thể loại này?',
+            title: 'Bạn có chắc chắn muốn xóa thể loại này?',
             text: "Dữ liệu sẽ không thể khôi phục sau khi xóa!",
             icon: 'warning',
             confirmButtonText: 'Xóa',
@@ -152,7 +148,7 @@ const CategoryManagement: React.FC = () => {
                         fetchAllCategories(currentPage);
                         Swal.fire('Đã xóa!', 'Thể loại đã được xóa.', 'success');
                     } catch (error) {
-                        toast.error("Không thể xóa thể loại")
+                        toast.error("Không thể xóa thể loại");
                     }
                 }
             }
@@ -160,25 +156,25 @@ const CategoryManagement: React.FC = () => {
     };
 
     return (
-        <div className="p-6 bg-gray-100">
+        <div className="p-6 bg-gradient-to-r from-blue-50 to-white">
             {/* Tiêu đề */}
             <div className="mb-4">
-                <h1 className="text-2xl font-bold flex items-center">
-                    <TbCategory className='mr-5' />
+                <h1 className="text-4xl font-bold flex items-center text-blue-600">
+                    <TbCategory className='mr-4 text-blue-700' />
                     Quản lý thể loại
                 </h1>
             </div>
 
             {/* Bộ lọc */}
-            <div className="bg-white p-4 rounded-md shadow mb-6">
-                <h2 className="text-lg font-semibold mb-2">Bộ lọc và tìm kiếm</h2>
+            <div className="bg-white p-6 rounded-lg shadow-lg mb-6">
+                <h2 className="text-2xl font-semibold mb-4">Bộ lọc và tìm kiếm</h2>
                 <div className="grid md:grid-cols-2 gap-4">
                     <div className='flex col-span-1 items-center'>
                         <label className="text-gray-700 mb-1 w-28">Tên thể loại:</label>
                         <input
                             type="text"
                             placeholder="Tìm kiếm"
-                            className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             value={keyword}
                             onChange={handleKeywordChange}
                         />
@@ -186,7 +182,7 @@ const CategoryManagement: React.FC = () => {
                     <div className='flex col-span-1 items-center'>
                         <label className="text-gray-700 mb-1 w-52">Trạng thái:</label>
                         <select
-                            className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             value={status}
                             onChange={(e) => setStatus(e.target.value)}
                         >
@@ -199,92 +195,68 @@ const CategoryManagement: React.FC = () => {
             </div>
 
             {/* Bảng danh sách */}
-            <div className="bg-white p-4 rounded-md shadow">
-                <h2 className="text-lg font-semibold mb-2">Danh sách thể loại</h2>
-                <div>
-                    <div className="flex justify-end mb-4">
-                        <button onClick={handleOpen} className="bg-blue-500 text-white px-2 py-2 rounded-md hover:bg-blue-600">
-                            Thêm thể loại
-                        </button>
-                    </div>
-
-                    {/* Modal thêm category */}
-                    <Dialog open={open} onClose={handleClose} maxWidth="xs" fullWidth>
-                        <DialogTitle>Thêm thể loại mới</DialogTitle>
-                        <DialogContent>
-                            <TextField
-                                autoFocus
-                                margin="dense"
-                                label="Tên thể loại"
-                                type="text"
-                                fullWidth
-                                variant="outlined"
-                                value={newCategory}
-                                onChange={(e) => setNewCategory(e.target.value)}
-                            />
-                        </DialogContent>
-                        <DialogActions>
-                            <Button onClick={handleClose} color="secondary">
-                                Hủy
-                            </Button>
-                            <Button onClick={handleSave} color="primary" variant="contained">
-                                Thêm
-                            </Button>
-                        </DialogActions>
-                    </Dialog>
+            <div className="bg-white p-6 rounded-lg shadow-lg">
+                <h2 className="text-2xl font-semibold mb-4">Danh sách thể loại</h2>
+                <div className="flex justify-end mb-4">
+                    <button onClick={handleOpen} className="bg-gradient-to-r from-green-400 to-blue-500 text-white px-4 py-2 rounded-md hover:bg-gradient-to-l transition duration-300 shadow-lg">
+                        Thêm thể loại
+                    </button>
                 </div>
-                <table className="w-full table-auto border-collapse">
+
+                {/* Modal thêm category */}
+                <Dialog open={open} onClose={handleClose} maxWidth="xs" fullWidth>
+                    <DialogTitle>Thêm thể loại mới</DialogTitle>
+                    <DialogContent>
+                        <TextField
+                            autoFocus
+                            margin="dense"
+                            label="Tên thể loại"
+                            type="text"
+                            fullWidth
+                            variant="outlined"
+                            value={newCategory}
+                            onChange={(e) => setNewCategory(e.target.value)}
+                        />
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleClose} color="secondary">
+                            Hủy
+                        </Button>
+                        <Button onClick={handleSave} color="primary" variant="contained">
+                            Thêm
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+
+                <table className="w-full table-auto border-collapse mt-4">
                     <thead>
-                        <tr className="bg-orange-500 text-white">
-                            <th className="border p-2">STT</th>
-                            <th className="border p-2">Tên Thể Loại</th>
-                            <th className="border p-2">Trạng Thái</th>
-                            <th className="border p-2">Hành động</th>
-                        </tr>
+                    <tr className="bg-blue-500 text-white">
+                        <th className="border p-4">STT</th>
+                        <th className="border p-4">Tên Thể Loại</th>
+                        <th className="border p-4">Trạng Thái</th>
+                        <th className="border p-4">Hành động</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        {categories.map((category, index) => (
-                            <tr key={category.id} className="bg-white hover:bg-gray-100">
-                                <td className="border p-2 text-center">{(index + 1) * (currentPage + 1)}</td>
-                                <td className="border p-2">{category.name}</td>
-                                <td className="border p-2 text-center">
-                                    <Switch
-                                        color="primary"
-                                        checked={category.status}
-                                        onChange={() => handleStatusChange(category.id, category.name, !category.status)}
-                                    />
-                                </td>
-                                <td className="border p-2 text-center">
-                                    <div className="flex justify-center items-center space-x-3">
-                                        <CiEdit size={25} className='cursor-pointer' color='blue' onClick={() => handleShow(category.id)} />
-                                        <MdDeleteForever size={25} className='cursor-pointer' color='red' onClick={() => handleDelete(category.id)} />
-                                    </div>
-                                </td>
-                                <Dialog open={openEdit} onClose={handleCloseEdit} maxWidth="xs" fullWidth>
-                                    <DialogTitle>Chỉnh sửa thể loại</DialogTitle>
-                                    <DialogContent>
-                                        <TextField
-                                            autoFocus
-                                            margin="dense"
-                                            label="Tên thể loại"
-                                            type="text"
-                                            fullWidth
-                                            variant="outlined"
-                                            value={newCategoryUpdate}
-                                            onChange={(e) => setNewCategoryUpdate(e.target.value)}
-                                        />
-                                    </DialogContent>
-                                    <DialogActions>
-                                        <Button onClick={handleCloseEdit} color="secondary">
-                                            Hủy
-                                        </Button>
-                                        <Button onClick={handleSaveEdit} color="primary" variant="contained">
-                                            Lưu
-                                        </Button>
-                                    </DialogActions>
-                                </Dialog>
-                            </tr>
-                        ))}
+                    {categories.map((category, index) => (
+                        <tr key={category.id} className="bg-white hover:bg-gray-100 transition duration-200">
+                            <td className="border p-4 text-center">{(index + 1) + (currentPage * 10)}</td>
+                            <td className="border p-4">{category.name}</td>
+                            <td className="border p-4 text-center">
+                                <Switch
+                                    color="primary"
+                                    checked={category.status}
+                                    onChange={() => handleStatusChange(category.id, category.name, !category.status)}
+                                />
+                            </td>
+                            <td className="border p-4 text-center">
+                                <div className="flex justify-center items-center space-x-3">
+                                    <CiEdit size={25} className='cursor-pointer text-blue-600 hover:text-blue-800' onClick={() => handleShow(category.id)} />
+                                    <MdDeleteForever size={25} className='cursor-pointer text-red-600 hover:text-red-800' onClick={() => handleDelete(category.id)} />
+                                </div>
+                            </td>
+                        </tr>
+                    ))}
                     </tbody>
                 </table>
                 <Pagination

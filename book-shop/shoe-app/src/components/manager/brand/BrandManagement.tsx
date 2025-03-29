@@ -39,7 +39,7 @@ const BrandManagement: React.FC = () => {
             const response = await createBrand(newBrandName, newBrandDescription);
             setBrands([...brands, response.data]);
             if (response) {
-                toast.success('Thêm Nhà xuất bản thành công', {
+                toast.success('Thêm thương hiệu thành công', {
                     autoClose: 3000,
                 });
             }
@@ -47,7 +47,7 @@ const BrandManagement: React.FC = () => {
             fetchAllBrands(currentPage);
         } catch (error) {
             console.error('Error creating brand:', error);
-            toast.error('Thêm Nhà xuất bản thất bại', {
+            toast.error('Thêm thương hiệu thất bại', {
                 autoClose: 3000,
             });
         }
@@ -60,10 +60,6 @@ const BrandManagement: React.FC = () => {
             setBrands(response.data.content);
             setTotalPages(response.data.page.totalPages);
             setLoading(false);
-            // console.log(currentPage);
-            console.log(totalPages);
-            
-            
         } catch (error) {
             setError('Không thể tải dữ liệu');
             setLoading(false);
@@ -98,20 +94,20 @@ const BrandManagement: React.FC = () => {
                 const response = await updateBrand(selectedBrand.id, newBrandUpdateName, newBrandUpdateDescription);
                 fetchAllBrands(currentPage);
                 if (response) {
-                    toast.success('Chỉnh sửa Nhà xuất bản thành công', {
+                    toast.success('Chỉnh sửa thương hiệu thành công', {
                         autoClose: 3000,
                     });
                 }
                 handleCloseEdit();
             } else {
-                toast.error('Chỉnh sửa Nhà xuất bản thất bại', {
+                toast.error('Chỉnh sửa thương hiệu thất bại', {
                     autoClose: 3000,
                 });
             }
             handleCloseEdit();
         } catch (error) {
             console.error('Error updating brand:', error);
-            toast.error('Chỉnh sửa Nhà xuất bản thất bại', {
+            toast.error('Chỉnh sửa thương hiệu thất bại', {
                 autoClose: 3000,
             });
         }
@@ -128,7 +124,7 @@ const BrandManagement: React.FC = () => {
 
     const handleDelete = (id: number) => {
         Swal.fire({
-            title: 'Bạn có chắc chắn muốn xóa Nhà xuất bản này?',
+            title: 'Bạn có chắc chắn muốn xóa thương hiệu này?',
             text: "Dữ liệu sẽ không thể khôi phục sau khi xóa!",
             icon: 'warning',
             confirmButtonText: 'Xóa',
@@ -144,11 +140,11 @@ const BrandManagement: React.FC = () => {
                         fetchAllBrands(currentPage);
                         Swal.fire(
                             'Đã xóa!',
-                            'Nhà xuất bản đã được xóa.',
+                            'Thương hiệu đã được xóa.',
                             'success'
                         );
                     } catch {
-                        toast.error("Không thể xóa nhà xuất bản")
+                        toast.error("Không thể xóa thương hiệu")
                     }
                 }
             }
@@ -156,141 +152,98 @@ const BrandManagement: React.FC = () => {
     };
 
     return (
-        <div className="p-6 bg-gray-100">
+        <div className="p-6 bg-gradient-to-r from-blue-50 to-white">
             {/* Tiêu đề */}
             <div className="mb-4">
-                <h1 className="text-2xl font-bold flex items-center">
-                    <FaTrademark className='mr-5' />
-                    Quản lý Nhà xuất bản
+                <h1 className="text-4xl font-bold flex items-center text-blue-600">
+                    <FaTrademark className='mr-4 text-blue-700' />
+                    Quản lý Thương hiệu
                 </h1>
             </div>
 
             {/* Bộ lọc */}
-            <div className="bg-white p-4 rounded-md shadow mb-6">
-                <h2 className="text-lg font-semibold mb-2">Bộ lọc và tìm kiếm</h2>
+            <div className="bg-white p-6 rounded-lg shadow-lg mb-6">
+                <h2 className="text-2xl font-semibold mb-4">Bộ lọc và tìm kiếm</h2>
                 <div className="grid md:grid-cols-2 gap-4">
                     <div className='flex col-span-1 items-center'>
-                        <label className="text-gray-700 mb-1 w-28">Tên Nhà xuất bản:</label>
+                        <label className="text-gray-700 mb-1 w-28">Tên Thương hiệu:</label>
                         <input
                             type="text"
                             placeholder="Tìm kiếm"
-                            className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             value={keyword}
                             onChange={handleKeywordChange}
                         />
                     </div>
-                    {/* <div className='flex col-span-1 items-center'>
-                        <label className="text-gray-700 mb-1 w-28">Trạng thái:</label>
-                        <select className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <option>Tất cả</option>
-                            <option>Đang kinh doanh</option>
-                            <option>Không còn kinh doanh</option>
-                        </select>
-                    </div> */}
                 </div>
             </div>
 
             {/* Bảng danh sách */}
-            <div className="bg-white p-4 rounded-md shadow">
-                <h2 className="text-lg font-semibold mb-2">Danh sách Nhà xuất bản</h2>
-                <div>
-                    <div className="flex justify-end mb-4">
-                        <button onClick={handleOpen} className="bg-blue-500 text-white px-2 py-2 rounded-md hover:bg-blue-600">
-                            Thêm Nhà xuất bản
-                        </button>
-                    </div>
-
-                    {/* Modal thêm brand */}
-                    <Dialog open={open} onClose={handleClose} maxWidth="xs" fullWidth>
-                        <DialogTitle>Thêm Nhà xuất bản mới</DialogTitle>
-                        <DialogContent>
-                            <TextField
-                                autoFocus
-                                margin="dense"
-                                label="Tên Nhà xuất bản"
-                                type="text"
-                                fullWidth
-                                variant="outlined"
-                                value={newBrandName}
-                                onChange={(e) => setNewBrandName(e.target.value)}
-                            />
-                            <TextField
-                                margin="dense"
-                                label="Mô tả"
-                                type="text"
-                                fullWidth
-                                variant="outlined"
-                                value={newBrandDescription}
-                                onChange={(e) => setNewBrandDescription(e.target.value)}
-                            />
-                        </DialogContent>
-                        <DialogActions>
-                            <Button onClick={handleClose} color="secondary">
-                                Hủy
-                            </Button>
-                            <Button onClick={handleSave} color="primary" variant="contained">
-                                Thêm
-                            </Button>
-                        </DialogActions>
-                    </Dialog>
+            <div className="bg-white p-6 rounded-lg shadow-lg">
+                <h2 className="text-2xl font-semibold mb-4">Danh sách Thương hiệu</h2>
+                <div className="flex justify-end mb-4">
+                    <button onClick={handleOpen} className="bg-gradient-to-r from-green-400 to-blue-500 text-white px-4 py-2 rounded-md hover:bg-gradient-to-l transition duration-300 shadow-lg">
+                        Thêm thương hiệu
+                    </button>
                 </div>
-                <table className="w-full table-auto border-collapse">
+
+                {/* Modal thêm brand */}
+                <Dialog open={open} onClose={handleClose} maxWidth="xs" fullWidth>
+                    <DialogTitle>Thêm Thương Hiệu Mới</DialogTitle>
+                    <DialogContent>
+                        <TextField
+                            autoFocus
+                            margin="dense"
+                            label="Tên Nhà xuất bản"
+                            type="text"
+                            fullWidth
+                            variant="outlined"
+                            value={newBrandName}
+                            onChange={(e) => setNewBrandName(e.target.value)}
+                        />
+                        <TextField
+                            margin="dense"
+                            label="Mô tả"
+                            type="text"
+                            fullWidth
+                            variant="outlined"
+                            value={newBrandDescription}
+                            onChange={(e) => setNewBrandDescription(e.target.value)}
+                        />
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleClose} color="secondary">
+                            Hủy
+                        </Button>
+                        <Button onClick={handleSave} color="primary" variant="contained">
+                            Thêm
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+
+                <table className="w-full table-auto border-collapse mt-4">
                     <thead>
-                        <tr className="bg-orange-500 text-white">
-                            <th className="border p-2">STT</th>
-                            <th className="border p-2">Tên Nhà xuất bản</th>
-                            <th className="border p-2">Mô tả</th>
-                            <th className="border p-2">Hành động</th>
-                        </tr>
+                    <tr className="bg-blue-500 text-white">
+                        <th className="border p-4">STT</th>
+                        <th className="border p-4">Tên Thương hiệu</th>
+                        <th className="border p-4">Mô tả</th>
+                        <th className="border p-4">Hành động</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        {brands.map((brand, index) => (
-                            <tr key={brand.id} className="bg-white hover:bg-gray-100">
-                                <td className="border p-2 text-center">{(index + 1) * (currentPage + 1)}</td>
-                                <td className="border p-2">{brand.name}</td>
-                                <td className="border p-2 text-center">
-                                    {brand.description}
-                                </td>
-                                <td className="border p-2 text-center">
-                                    <div className="flex justify-center items-center space-x-3">
-                                        <CiEdit size={25} className='hover: cursor-pointer' color='blue' onClick={() => handleShow(brand.id)} />
-                                        <MdDeleteForever size={25} className='cursor-pointer' color='red' onClick={() => handleDelete(brand.id)} />
-                                    </div>
-                                </td>
-                                <Dialog open={openEdit} onClose={handleCloseEdit} maxWidth="xs" fullWidth>
-                                    <DialogTitle>Chỉnh sửa Nhà xuất bản</DialogTitle>
-                                    <DialogContent>
-                                        <TextField
-                                            autoFocus
-                                            margin="dense"
-                                            label="Tên Nhà xuất bản"
-                                            type="text"
-                                            fullWidth
-                                            variant="outlined"
-                                            value={newBrandUpdateName}
-                                            onChange={(e) => setNewBrandUpdateName(e.target.value)}
-                                        />
-                                        <TextField
-                                            margin="dense"
-                                            label="Mô tả"
-                                            type="text"
-                                            fullWidth
-                                            variant="outlined"
-                                            value={newBrandUpdateDescription}
-                                            onChange={(e) => setNewBrandUpdateDescription(e.target.value)}
-                                        />
-                                    </DialogContent>
-                                    <DialogActions>
-                                        <Button onClick={handleCloseEdit} color="secondary">
-                                            Hủy
-                                        </Button>
-                                        <Button onClick={handleSaveEdit} color="primary" variant="contained">
-                                            Lưu
-                                        </Button>
-                                    </DialogActions>
-                                </Dialog>
-                            </tr>
-                        ))}
+                    {brands.map((brand, index) => (
+                        <tr key={brand.id} className="bg-white hover:bg-gray-100 transition duration-200">
+                            <td className="border p-4 text-center">{(index + 1) + (currentPage * 10)}</td>
+                            <td className="border p-4">{brand.name}</td>
+                            <td className="border p-4 text-center">{brand.description}</td>
+                            <td className="border p-4 text-center">
+                                <div className="flex justify-center items-center space-x-3">
+                                    <CiEdit size={25} className='cursor-pointer text-blue-600 hover:text-blue-800' onClick={() => handleShow(brand.id)} />
+                                    <MdDeleteForever size={25} className='cursor-pointer text-red-600 hover:text-red-800' onClick={() => handleDelete(brand.id)} />
+                                </div>
+                            </td>
+                        </tr>
+                    ))}
                     </tbody>
                 </table>
                 <Pagination

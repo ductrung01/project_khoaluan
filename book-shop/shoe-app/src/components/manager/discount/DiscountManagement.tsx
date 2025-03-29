@@ -78,7 +78,7 @@ const DiscountManagement: React.FC = () => {
         <div className="p-6">
             {/* Tiêu đề */}
             <div className="mb-4">
-                <h1 className="text-2xl font-bold flex items-center">
+                <h1 className="text-4xl font-bold flex items-center text-blue-600">
                     {/* <Tbdiscount className='mr-5' /> */}
                     Quản lý đợt giảm giá
                 </h1>
@@ -118,14 +118,14 @@ const DiscountManagement: React.FC = () => {
                 <h2 className="text-lg font-semibold mb-2">Danh sách đợt giảm giá</h2>
                 <div>
                     <div className="flex justify-end mb-4">
-                        <button onClick={() => navigate("/manager/create-discount")} className="bg-blue-500 text-white px-2 py-2 rounded-md hover:bg-blue-600">
+                        <button onClick={() => navigate("/manager/create-discount")} className="bg-gradient-to-r from-green-400 to-blue-500 text-white px-4 py-2 rounded-md hover:bg-gradient-to-l transition duration-300 shadow-lg">
                             Thêm
                         </button>
                     </div>
                 </div>
                 <table className="w-full table-auto border-collapse">
                     <thead>
-                        <tr className="bg-orange-500 text-white">
+                        <tr className="bg-blue-500 text-white">
                             <th className="border p-2">STT</th>
                             <th className="border p-2">Tên đợt giảm giá</th>
                             <th className="border p-2">Giá trị giảm</th>

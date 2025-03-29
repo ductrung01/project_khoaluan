@@ -492,7 +492,7 @@ const CreateStaff: React.FC = () => {
                             <Button variant="outlined" color="secondary" sx={{ marginX: 2 }} onClick={() => navigate("/manager/staff-management")}>
                                 Quay lại
                             </Button>
-                            <Button variant="contained" color="primary" type="submit">
+                            <Button variant="contained" color="success" type="submit">
                                 Tạo mới
                             </Button>
                         </Box>

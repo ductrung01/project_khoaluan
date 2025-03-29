@@ -93,7 +93,7 @@ const OrderManagement: React.FC = () => {
 
   return (
     <Box sx={{ padding: 4 }}>
-      <Typography variant="h5" sx={{ mb: 3 }}>
+      <Typography className={"text-blue-600"} variant="h5" sx={{ mb: 3 }}>
         Danh sách đơn hàng
       </Typography>
 
@@ -116,7 +116,7 @@ const OrderManagement: React.FC = () => {
 
       {/* Add Invoice Button */}
       <Box display="flex" justifyContent="flex-end" mb={2}>
-        <Button variant="contained" color="primary" onClick={() => navigate("/manager/sales-counter")}>
+        <Button variant="contained" className={"bg-gradient-to-r from-green-400 to-blue-500 text-white px-4 py-2 rounded-md hover:bg-gradient-to-l transition duration-300 shadow-lg"} onClick={() => navigate("/manager/sales-counter")}>
           + Tạo đơn
         </Button>
       </Box>
@@ -125,7 +125,7 @@ const OrderManagement: React.FC = () => {
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
-            <TableRow>
+            <TableRow className={"bg-blue-500 text-white"}>
               {/* <TableCell align="center"></TableCell> */}
               <TableCell align="center">STT</TableCell>
               <TableCell align="center">Mã đơn hàng</TableCell>

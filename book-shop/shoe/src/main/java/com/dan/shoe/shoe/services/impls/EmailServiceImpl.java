@@ -29,7 +29,7 @@ public class EmailServiceImpl implements EmailService {
     public void sendVerificationEmail(User user) {
         String toAddress = user.getEmail();
         String subject = "Hãy xác thực email của bạn";
-        String senderName = "Book shop";
+        String senderName = "Perfume Store";
 
         Map<String, Object> model = new HashMap<>();
         model.put("name", user.getName());
@@ -59,7 +59,7 @@ public class EmailServiceImpl implements EmailService {
     public void sendForgotPasswordEmail(User user) {
         String toAddress = user.getEmail();
         String subject = "Email quên mật khẩu";
-        String senderName = "Book Shop";
+        String senderName = "Perfume Store";
 
         Map<String, Object> model = new HashMap<>();
         model.put("name", user.getName());

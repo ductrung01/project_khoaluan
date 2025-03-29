@@ -91,8 +91,8 @@ const StaffManagement: React.FC = () => {
         <div className="p-6 bg-gray-100">
             {/* Tiêu đề */}
             <div className="mb-4">
-                <h1 className="text-2xl font-bold flex items-center">
-                    <TbCategory className='mr-5' />
+                <h1 className="text-4xl font-bold flex items-center text-blue-600">
+                    <TbCategory className='mr-4 text-blue-700' />
                     Quản lý nhân viên
                 </h1>
             </div>
@@ -131,7 +131,7 @@ const StaffManagement: React.FC = () => {
                 <h2 className="text-lg font-semibold mb-2">Danh sách nhân viên</h2>
                 <div>
                     <div className="flex justify-end mb-4">
-                        <Link to="/manager/create-staff" className="bg-blue-500 text-white px-2 py-2 rounded-md hover:bg-blue-600">
+                        <Link to="/manager/create-staff" className="bg-gradient-to-r from-green-400 to-blue-500 text-white px-4 py-2 rounded-md hover:bg-gradient-to-l transition duration-300 shadow-lg">
                             Thêm tài khoản nhân viên
                         </Link>
                     </div>
@@ -139,7 +139,7 @@ const StaffManagement: React.FC = () => {
                 </div>
                 <table className="w-full table-auto border-collapse">
                     <thead>
-                        <tr className="bg-orange-500 text-white">
+                        <tr className="bg-blue-500 text-white">
                             <th className="border p-2">STT</th>
                             <td className="border p-2">Hình ảnh</td>
                             <th className="border p-2">Tên nhân viên</th>

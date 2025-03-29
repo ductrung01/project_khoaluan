@@ -223,7 +223,7 @@ const CreateProductWithVariants: React.FC = () => {
 
     return (
         <Card sx={{ maxWidth: 800, margin: 'auto', padding: 3, marginTop: 5 }}>
-            <Typography variant="h5" sx={{ marginBottom: 2 }}>Tạo sản phẩm mới và biến thể</Typography>
+            <Typography className=" text-blue-600" variant="h5" sx={{ marginBottom: 2 }}>Tạo sản phẩm mới và biến thể</Typography>
             <Box display="flex" flexDirection="column" gap={2}>
                 <TextField label="Tên sản phẩm" value={name} onChange={(e) => setName(e.target.value)} fullWidth required />
                 <TextField label="Mô tả sản phẩm" value={description} onChange={(e) => setDescription(e.target.value)} fullWidth multiline rows={4} required />
@@ -236,7 +236,7 @@ const CreateProductWithVariants: React.FC = () => {
                 required />
 
                 <FormControl fullWidth>
-                    <InputLabel id="brand-select-label">Nhà xuất bản</InputLabel>
+                    <InputLabel id="brand-select-label">Thương hiệu</InputLabel>
                     <Select labelId="brand-select-label" value={selectedBrand || 'no-brand'} onChange={(e) => setSelectedBrand(Number(e.target.value))} label="Nhà xuất bản" required>
                         <MenuItem value="no-brand">Chưa chọn</MenuItem>
                         {brands.map((brand) => (
@@ -256,7 +256,7 @@ const CreateProductWithVariants: React.FC = () => {
                 </FormControl>
 
                 <Box>
-                    <Typography variant="subtitle1">Chọn năm xuất hoặc tái bản bản</Typography>
+                    <Typography variant="subtitle1">Chọn năm sản xuất</Typography>
                     <Box display="flex" flexWrap="wrap" gap={1}>
                         {sizes.map(size => (
                             <Button key={size} variant={selectedSizes.includes(size) ? 'contained' : 'outlined'} onClick={() => handleSizeChange(size)}>

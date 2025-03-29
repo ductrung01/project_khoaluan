@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
-import { Box, Typography, Grid, Card } from '@mui/material';
+import { Box, Typography, Grid, Card, Button } from '@mui/material';
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -11,12 +11,12 @@ import {
     Tooltip,
     Legend,
 } from 'chart.js';
-import { getDailyStatistics, getStatistics } from '../../../services/order.service';
+import { getDailyStatistics } from '../../../services/order.service';
 import { DatePicker } from '@mui/x-date-pickers';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { Button } from '@mui/material';
 import { format } from 'date-fns';
+
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 const options = {
@@ -44,7 +44,7 @@ const RevenueManagement: React.FC = () => {
         try {
             const formattedStartDate = startDate ? format(startDate, 'yyyy-MM-dd') : '';
             const formattedEndDate = endDate ? format(endDate, 'yyyy-MM-dd') : '';
-            
+
             const response = await getDailyStatistics(formattedStartDate, formattedEndDate);
             console.log('Response:', response.data);
 
@@ -87,8 +87,8 @@ const RevenueManagement: React.FC = () => {
     }, []);
 
     return (
-        <Box sx={{ padding: 3 }}>
-            <Typography variant="h4" sx={{ marginBottom: 3 }}>
+        <Box sx={{ padding: 3, backgroundColor: '#f7f9fc' }}>
+            <Typography variant="h4" sx={{ marginBottom: 3, color: '#333' }}>
                 Quản lý Doanh Thu và Đơn Hàng
             </Typography>
 
@@ -114,10 +114,10 @@ const RevenueManagement: React.FC = () => {
                     </LocalizationProvider>
                 </Grid>
                 <Grid item xs={12} md={2}>
-                    <Button 
-                        variant="contained" 
+                    <Button
+                        variant="contained"
                         onClick={handleFetchData}
-                        sx={{ height: '56px', width: '100%' }}
+                        sx={{ height: '56px', width: '100%', backgroundColor: '#1976d2', '&:hover': { backgroundColor: '#115293' } }}
                     >
                         Xem thống kê
                     </Button>
@@ -127,7 +127,7 @@ const RevenueManagement: React.FC = () => {
             {/* Tổng doanh thu và tổng đơn hàng */}
             <Grid container spacing={2} sx={{ marginTop: 3 }}>
                 <Grid item xs={12} sm={6} md={6}>
-                    <Card sx={{ padding: 2, textAlign: 'center' }}>
+                    <Card sx={{ padding: 2, textAlign: 'center', backgroundColor: '#e3f2fd' }}>
                         <Typography variant="h6" color="textSecondary">
                             Tổng doanh thu
                         </Typography>
@@ -140,7 +140,7 @@ const RevenueManagement: React.FC = () => {
                 </Grid>
 
                 <Grid item xs={12} sm={6} md={6}>
-                    <Card sx={{ padding: 2, textAlign: 'center' }}>
+                    <Card sx={{ padding: 2, textAlign: 'center', backgroundColor: '#e8f5e9' }}>
                         <Typography variant="h6" color="textSecondary">
                             Tổng số đơn hàng thành công
                         </Typography>
@@ -158,7 +158,7 @@ const RevenueManagement: React.FC = () => {
             <Grid container spacing={3}>
                 {/* Doanh thu */}
                 <Grid item xs={12} md={6}>
-                    <Card sx={{ padding: 2 }}>
+                    <Card sx={{ padding: 2, backgroundColor: '#fff' }}>
                         <Typography variant="h6" sx={{ marginBottom: 2 }}>
                             Doanh Thu Theo Tháng
                         </Typography>
@@ -171,7 +171,7 @@ const RevenueManagement: React.FC = () => {
 
                 {/* Số lượng đơn hàng */}
                 <Grid item xs={12} md={6}>
-                    <Card sx={{ padding: 2 }}>
+                    <Card sx={{ padding: 2, backgroundColor: '#fff' }}>
                         <Typography variant="h6" sx={{ marginBottom: 2 }}>
                             Số Lượng Đơn Hàng Theo Tháng
                         </Typography>

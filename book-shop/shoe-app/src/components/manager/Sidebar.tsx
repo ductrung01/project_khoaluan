@@ -58,7 +58,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
                                 </li>
                                 <li>
                                     <Link to="/manager/brand-management" className="block px-4 py-1 hover:bg-gray-700 rounded text-left transition duration-200">
-                                        Nhà xuất bản
+                                        Thương hiệu
                                     </Link>
                                 </li>
                                 <li>
